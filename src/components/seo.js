@@ -21,7 +21,8 @@ const SEO = ({ description, lang, meta, title }) => {
             social {
               twitter
             }
-          }
+            icon
+          }          
         }
       }
     `
@@ -29,6 +30,7 @@ const SEO = ({ description, lang, meta, title }) => {
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
+  const defaultIcon = site.siteMetaData.icon
 
   return (
     <Helmet
@@ -36,7 +38,7 @@ const SEO = ({ description, lang, meta, title }) => {
         lang,
       }}
       title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
+      titleTemplate={defaultTitle ? `${defaultTitle} | %s` : null}
       meta={[
         {
           name: `description`,
@@ -44,7 +46,7 @@ const SEO = ({ description, lang, meta, title }) => {
         },
         {
           property: `og:title`,
-          content: title,
+          content: defaultTitle + " | " + title,
         },
         {
           property: `og:description`,
@@ -53,6 +55,10 @@ const SEO = ({ description, lang, meta, title }) => {
         {
           property: `og:type`,
           content: `website`,
+        },
+        {
+          property: 'og:image',
+          content: defaultIcon,
         },
         {
           name: `twitter:card`,
